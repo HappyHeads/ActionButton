@@ -1,0 +1,248 @@
+[gd_scene load_steps=17 format=3 uid="uid://v7jp6ksajc3g"]
+
+[ext_resource type="Script" uid="uid://di11q0mhb4hdo" path="res://addons/action_button/action_button.gd" id="1_gx22s"]
+[ext_resource type="Script" uid="uid://bbmr3yytorn4r" path="res://addons/action_button/action_button_effect.gd" id="2_h2i6h"]
+[ext_resource type="AudioStream" uid="uid://b5vyle6fatqw2" path="res://demo_action_button/assets/cursor.mp3" id="3_dtld8"]
+[ext_resource type="AudioStream" uid="uid://7qb2vdolws16" path="res://demo_action_button/assets/decision.mp3" id="4_xb8g1"]
+[ext_resource type="AudioStream" uid="uid://bynw6hi6knbpj" path="res://demo_action_button/assets/paper-take.mp3" id="5_s40ro"]
+[ext_resource type="AudioStream" uid="uid://dui53pbcgoy2k" path="res://demo_action_button/assets/cork-plug.mp3" id="6_2gyio"]
+
+[sub_resource type="Resource" id="Resource_fcyx5"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.1
+position = Vector2(0, -8)
+rotation = 0.0
+scale = 1.0
+color = Color(1, 1, 1, 1)
+transition_type = 0
+ease_type = 0
+volume_db = 0.0
+pitch_scale = 1.0
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_0h0yp"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.05
+position = Vector2(0, 8)
+rotation = 0.0
+scale = 1.0
+color = Color(1, 1, 1, 1)
+transition_type = 4
+ease_type = 1
+audio_stream = ExtResource("3_dtld8")
+volume_db = 0.0
+pitch_scale = 0.9
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_w3kbx"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.1
+position = Vector2(0, -8)
+rotation = 0.0
+scale = 1.0
+color = Color(1, 1, 1, 1)
+transition_type = 9
+ease_type = 1
+audio_stream = ExtResource("3_dtld8")
+volume_db = 0.0
+pitch_scale = 1.0
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_k2f74"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.15
+position = Vector2(0, 0)
+rotation = 0.0
+scale = 1.1
+color = Color(1, 1, 1, 1)
+transition_type = 4
+ease_type = 0
+volume_db = 0.0
+pitch_scale = 0.7
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_svrvd"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.2
+position = Vector2(0, 0)
+rotation = 0.0
+scale = 0.9
+color = Color(1, 1, 1, 1)
+transition_type = 5
+ease_type = 1
+volume_db = 0.0
+pitch_scale = 1.0
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_5orp4"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.1
+position = Vector2(0, 0)
+rotation = 0.0
+scale = 1.25
+color = Color(1, 1, 1, 1)
+transition_type = 4
+ease_type = 1
+audio_stream = ExtResource("4_xb8g1")
+volume_db = -10.0
+pitch_scale = 1.4
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_eygla"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.1
+position = Vector2(0, -4)
+rotation = -1.0
+scale = 1.1
+color = Color(0.647645, 0.489049, 0.841254, 1)
+transition_type = 0
+ease_type = 0
+audio_stream = ExtResource("5_s40ro")
+volume_db = -12.0
+pitch_scale = 2.0
+max_polyphony = 2
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_3gv6m"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.1
+position = Vector2(0, -4)
+rotation = -5.0
+scale = 1.0
+color = Color(0.585062, 0.585062, 0.585062, 1)
+transition_type = 2
+ease_type = 1
+audio_stream = ExtResource("6_2gyio")
+volume_db = -20.0
+pitch_scale = 1.3
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_udfxo"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.08
+position = Vector2(0, -4)
+rotation = 7.5
+scale = 1.0
+color = Color(2, 2, 2, 1)
+transition_type = 3
+ease_type = 1
+audio_stream = ExtResource("6_2gyio")
+volume_db = -20.0
+pitch_scale = 1.0
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[sub_resource type="Resource" id="Resource_774mx"]
+script = ExtResource("2_h2i6h")
+motion_duration = 0.1
+position = Vector2(0, 0)
+rotation = 0.0
+scale = 1.0
+color = Color(1, 1, 1, 1)
+transition_type = 0
+ease_type = 0
+audio_stream = ExtResource("5_s40ro")
+volume_db = -12.0
+pitch_scale = 1.8
+max_polyphony = 1
+bus = &"Master"
+metadata/_custom_type_script = "uid://bbmr3yytorn4r"
+
+[node name="ButtonPlusDemo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -89.0
+offset_right = 345.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="ButtonPlus" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_bottom = NodePath("../ButtonPlus4")
+theme_override_font_sizes/font_size = 32
+text = "Clicky button"
+script = ExtResource("1_gx22s")
+on_hover = SubResource("Resource_fcyx5")
+on_button_down = SubResource("Resource_0h0yp")
+on_button_up = SubResource("Resource_w3kbx")
+metadata/_custom_type_script = "uid://di11q0mhb4hdo"
+
+[node name="ButtonPlus5" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Bouncy button"
+script = ExtResource("1_gx22s")
+on_hover = SubResource("Resource_k2f74")
+on_button_down = SubResource("Resource_svrvd")
+on_button_up = SubResource("Resource_5orp4")
+metadata/_custom_type_script = "uid://di11q0mhb4hdo"
+
+[node name="ButtonPlus3" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Wacky button"
+script = ExtResource("1_gx22s")
+on_hover = SubResource("Resource_eygla")
+on_button_down = SubResource("Resource_3gv6m")
+on_button_up = SubResource("Resource_udfxo")
+on_rest = SubResource("Resource_774mx")
+metadata/_custom_type_script = "uid://di11q0mhb4hdo"
+
+[node name="ButtonPlus4" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Toggle button"
+script = ExtResource("1_gx22s")
+on_hover = SubResource("Resource_fcyx5")
+on_button_down = SubResource("Resource_0h0yp")
+on_button_up = SubResource("Resource_w3kbx")
+metadata/_custom_type_script = "uid://di11q0mhb4hdo"
+
+[node name="ButtonPlus6" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Disabled button"
+script = ExtResource("1_gx22s")
+on_hover = SubResource("Resource_eygla")
+on_button_down = SubResource("Resource_3gv6m")
+on_button_up = SubResource("Resource_udfxo")
+on_rest = SubResource("Resource_774mx")
+metadata/_custom_type_script = "uid://di11q0mhb4hdo"
