@@ -170,7 +170,7 @@ func tween_it(property : ActionButtonEffect, what_state : state ,reset_after_don
 	tween.set_parallel(true)
 	tween.tween_property(self, "position", start_pos + property.position, property.motion_duration)
 	tween.tween_property(self, "rotation_degrees", property.rotation, property.motion_duration)
-	tween.tween_property(self, "scale", Vector2.ONE * property.scale, property.motion_duration)
+	tween.tween_property(self, "scale", property.scale, property.motion_duration)
 	tween.tween_property(self, "self_modulate", property.color, property.motion_duration)
 	await tween.finished
 	if reset_after_done:
@@ -198,5 +198,5 @@ func tween_it_reset():
 	tween_reset.set_parallel(true)
 	tween_reset.tween_property(self, "position", start_pos + property.position, property.motion_duration)
 	tween_reset.tween_property(self, "rotation_degrees", property.rotation, property.motion_duration)
-	tween_reset.tween_property(self, "scale", Vector2.ONE * property.scale, property.motion_duration)
+	tween_reset.tween_property(self, "scale", property.scale, property.motion_duration)
 	tween_reset.tween_property(self, "self_modulate", property.color, property.motion_duration)

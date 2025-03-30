@@ -10,7 +10,7 @@ extends Resource
 ##How much to rotate the button when animated, in degrees.
 @export var rotation : float
 ##How much to scale the button when animated.
-@export var scale : float = 1
+@export var scale : Vector2 = Vector2.ONE
 ##How much to modulate the color of the button when animated, uses self-modulate.
 @export var color : Color = Color.WHITE
 @export var transition_type: Tween.TransitionType
