@@ -3,7 +3,7 @@ extends Node
 
 var streams : Dictionary[String, AudioStreamPlayer]
 
-##Function that appends and keeps refrence of sounds to use for ActionButton.
+##Function that appends and keeps reference of sounds to use for ActionButton.
 ##Where possible it will reuse sounds if they have the same settings.
 func append_audio(property : ActionButtonEffect) -> AudioStreamPlayer:
 	if !property:

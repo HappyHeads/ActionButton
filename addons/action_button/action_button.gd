@@ -4,20 +4,20 @@ extends Button
 
 ##Action that plays when you hover over the button with your mouse or when you focus on it. 
 @export var on_hover : ActionButtonEffect
-##Action that plays when the button is pressed either with mouse or UI input. Has no correlation with [annotation BaseButton.action_mode]
+##Action that plays when the button is pressed either with mouse or UI input. Has no connection with [annotation BaseButton.action_mode]
 @export var on_button_down : ActionButtonEffect
-##Action that plays when the buttin is let go either with mouse or UI input. Has no correlation with [annotation BaseButton.action_mode]
+##Action that plays when the button is let go either with mouse or UI input. Has no connection with [annotation BaseButton.action_mode]
 @export var on_button_up : ActionButtonEffect
-##Action that plays when the button is back to its original base state. In most use cases this can left at default values or be [code]null[/code].
+##Action that plays when the button is back to its original base state. In most use cases this can be left at default values or be [code]null[/code].
 @export var on_rest : ActionButtonEffect
 
-##Refrence to the audio stream used for [on_hover]
+##Reference to the audio stream used for [on_hover]
 var stream_hover : AudioStreamPlayer
-##Refrence to the audio stream used for [on_button_down]
+##Reference to the audio stream used for [on_button_down]
 var stream_button_down : AudioStreamPlayer
-##Refrence to the audio stream used for [on_button_up]
+##Reference to the audio stream used for [on_button_up]
 var stream_button_up : AudioStreamPlayer
-##Refrence to the audio stream used for [on_res]
+##Reference to the audio stream used for [on_res]
 var stream_rest : AudioStreamPlayer
 
 var tween : Tween

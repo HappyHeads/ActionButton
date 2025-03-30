@@ -6,16 +6,12 @@ extends Resource
 ##For how long the motion will animate for in seconds.
 @export var motion_duration : float = 0.1
 ##How much to offset the position of the button when animated. Big values might make the button behave unexpecedly.
-##[br][br][b]Note:[/b] This is value is unused for [annotation ActionButton.on_rest].
 @export var position : Vector2
 ##How much to rotate the button when animated, in degrees.
-##[br][br][b]Note:[/b] This is value is unused for [annotation ActionButton.on_rest].
 @export var rotation : float
 ##How much to scale the button when animated.
-##[br][br][b]Note:[/b] This is value is unused for [annotation ActionButton.on_rest].
 @export var scale : float = 1
 ##How much to modulate the color of the button when animated, uses self-modulate.
-##[br][br][b]Note:[/b] This is value is unused for [annotation ActionButton.on_rest].
 @export var color : Color = Color.WHITE
 @export var transition_type: Tween.TransitionType
 @export var ease_type: Tween.EaseType
