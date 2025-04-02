@@ -6,11 +6,11 @@ extends Resource
 ##For how long the motion will animate for in seconds.
 @export var motion_duration : float = 0.1
 ##How much to offset the position of the button when animated. Big values might make the button behave unexpecedly.
-@export var position : Vector2
+@export_custom(PROPERTY_HINT_NONE, "suffix:px") var position : Vector2
 ##How much to rotate the button when animated, in degrees.
-@export var rotation : float
+@export_range(-360, 360, 0.1, "degrees", "or_greater", "or_less") var rotation : float
 ##How much to scale the button when animated.
-@export var scale : Vector2 = Vector2.ONE
+@export_custom(PROPERTY_HINT_LINK, "") var scale : Vector2 = Vector2.ONE
 ##How much to modulate the color of the button when animated, uses self-modulate.
 @export var color : Color = Color.WHITE
 @export var transition_type: Tween.TransitionType
