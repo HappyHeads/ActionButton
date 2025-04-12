@@ -4,20 +4,20 @@ extends Button
 
 ##Action that plays when you hover over the button with your mouse or when you focus on it. 
 @export var on_hover : ActionButtonEffect
-##Action that plays when the button is pressed either with mouse or UI input. Has no connection with [annotation BaseButton.action_mode]
+##Action that plays when the button is pressed either with mouse or UI input. Has no connection with [member BaseButton.action_mode]
 @export var on_button_down : ActionButtonEffect
-##Action that plays when the button is let go either with mouse or UI input. Has no connection with [annotation BaseButton.action_mode]
+##Action that plays when the button is let go either with mouse or UI input. Has no connection with [member BaseButton.action_mode]
 @export var on_button_up : ActionButtonEffect
 ##Action that plays when the button is back to its original base state. In most use cases this can be left at default values or be [code]null[/code].
 @export var on_rest : ActionButtonEffect
 
-##Reference to the audio stream used for [on_hover]
+##Reference to the audio stream used for [member on_hover]
 var stream_hover : AudioStreamPlayer
-##Reference to the audio stream used for [on_button_down]
+##Reference to the audio stream used for [member on_button_down]
 var stream_button_down : AudioStreamPlayer
-##Reference to the audio stream used for [on_button_up]
+##Reference to the audio stream used for [member on_button_up]
 var stream_button_up : AudioStreamPlayer
-##Reference to the audio stream used for [on_res]
+##Reference to the audio stream used for [member on_rest]
 var stream_rest : AudioStreamPlayer
 
 var tween : Tween
@@ -25,8 +25,9 @@ var tween_reset : Tween
 ##Default effect that is used when a [ActionButtonEffect] is not set for a state.
 var fallback_property : ActionButtonEffect
 
-var start_pos : Vector2
-var start_z_index : int
+##Keeps track of where the "original" position of the button is. If you are moving the button outside of this code you might want to set this variable.
+var default_position : Vector2
+var default_z_index : int
 enum state {REST, HOVER, BUTTON_DOWN, BUTTON_UP}
 var current_state : state
 var is_focused : bool
@@ -50,23 +51,21 @@ func _ready() -> void:
 	
 	toggled.connect(_on_toggle)
 	
-	if on_hover == null or on_button_up == null or on_button_down:
+	var parent = get_parent_control()
+	if parent is Container:
+		parent.sort_children.connect(_on_container_sort)
+	
+	if on_hover == null or on_button_up == null or on_button_down == null or on_rest == null:
 		fallback_property = ActionButtonEffect.new()
 	
-	start_pos = position
-	start_z_index = z_index
+	default_position = position
+	default_z_index = z_index
 	pivot_offset = size / 2
 	
-	#Init on rest state
-	var property : ActionButtonEffect = on_rest
-	if property == null:
-		property = fallback_property
-	position = start_pos + property.position
-	rotation_degrees = property.rotation
-	scale = Vector2.ONE * property.scale
-	self_modulate = property.color
+	reset()
 
 
+##Sets up all the audio stuff with the global ActionButtonAudio so the button can have sounds.
 func init_audio() -> void:
 	#ATTENTION, if this is giving you an errors you probably did not enable the plugin in project settings
 	stream_hover = ActionButtonAudio.append_audio(on_hover)
@@ -74,6 +73,15 @@ func init_audio() -> void:
 	stream_button_up = ActionButtonAudio.append_audio(on_button_up)
 	stream_rest = ActionButtonAudio.append_audio(on_rest)
 
+
+func _on_container_sort() -> void:
+	default_position = position
+	if tween_reset:
+		tween_reset.kill()
+	if tween:
+		tween.kill()
+	reset()
+	
 
 func _on_mouse_entered():
 	if toggle_mode and button_pressed:
@@ -153,6 +161,7 @@ func _on_toggle(toggled_on : bool):
 			tween_it(on_button_up, state.BUTTON_UP, true)
 
 
+## Tweens to a state.
 func tween_it(property : ActionButtonEffect, what_state : state ,reset_after_done : bool = false, override : bool = false) -> void:
 	if current_state == what_state:
 		return
@@ -162,13 +171,13 @@ func tween_it(property : ActionButtonEffect, what_state : state ,reset_after_don
 		tween.kill()
 	if property == null:
 		property = fallback_property
-	z_index = start_z_index+100
+	z_index = default_z_index+100
 	current_state = what_state
 	tween = create_tween()
 	tween.set_trans(property.transition_type)
 	tween.set_ease(property.ease_type)
 	tween.set_parallel(true)
-	tween.tween_property(self, "position", start_pos + property.position, property.motion_duration)
+	tween.tween_property(self, "position", default_position + property.position, property.motion_duration)
 	tween.tween_property(self, "rotation_degrees", property.rotation, property.motion_duration)
 	tween.tween_property(self, "scale", property.scale, property.motion_duration)
 	tween.tween_property(self, "self_modulate", property.color, property.motion_duration)
@@ -180,6 +189,7 @@ func tween_it(property : ActionButtonEffect, what_state : state ,reset_after_don
 			tween_it_reset()
 
 
+##Tweens to [memeber on_rest]
 func tween_it_reset():
 	var property : ActionButtonEffect = on_rest
 	if current_state == state.REST:
@@ -190,13 +200,24 @@ func tween_it_reset():
 		tween.kill()
 	if property == null:
 		property = fallback_property
-	z_index = start_z_index
+	z_index = default_z_index
 	current_state = state.REST
 	tween_reset = create_tween()
 	tween_reset.set_trans(property.transition_type)
 	tween_reset.set_ease(property.ease_type)
 	tween_reset.set_parallel(true)
-	tween_reset.tween_property(self, "position", start_pos + property.position, property.motion_duration)
+	tween_reset.tween_property(self, "position", default_position + property.position, property.motion_duration)
 	tween_reset.tween_property(self, "rotation_degrees", property.rotation, property.motion_duration)
 	tween_reset.tween_property(self, "scale", property.scale, property.motion_duration)
 	tween_reset.tween_property(self, "self_modulate", property.color, property.motion_duration)
+
+
+##Reset to [member on_rest] immediately
+func reset():
+	var property : ActionButtonEffect = on_rest
+	if property == null:
+		property = fallback_property
+	position = default_position + property.position
+	rotation_degrees = property.rotation
+	scale = Vector2.ONE * property.scale
+	self_modulate = property.color

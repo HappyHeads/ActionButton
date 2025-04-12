@@ -13,4 +13,4 @@
 # Features
 * Customize how the button animates and looks when you interact with it.
 * Configure sounds for the button, with a system that keeps track of sounds and reuses them accross the project.
-* Mostly documated and extensible code
+* A mostly documated code
