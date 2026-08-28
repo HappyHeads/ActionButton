@@ -24,9 +24,7 @@ var tween : Tween
 var tween_reset : Tween
 ##Default effect that is used when a [ActionButtonEffect] is not set for a state.
 var fallback_property : ActionButtonEffect
-
-##Keeps track of where the "original" position of the button is. If you are moving the button outside of this code you might want to set this variable.
-var default_position : Vector2
+##Keeps track of what the "original" z_index of the button is. If you are messing with the z_index outside of this code you might want to set this variable.
 var default_z_index : int
 enum state {REST, HOVER, BUTTON_DOWN, BUTTON_UP}
 var current_state : state
@@ -58,9 +56,9 @@ func _ready() -> void:
 	if on_hover == null or on_button_up == null or on_button_down == null or on_rest == null:
 		fallback_property = ActionButtonEffect.new()
 	
-	default_position = position
 	default_z_index = z_index
-	pivot_offset = size / 2
+	
+	offset_transform_enabled = true
 	
 	reset()
 
@@ -75,7 +73,6 @@ func init_audio() -> void:
 
 
 func _on_container_sort() -> void:
-	default_position = position
 	if tween_reset:
 		tween_reset.kill()
 	if tween:
@@ -171,15 +168,16 @@ func tween_it(property : ActionButtonEffect, what_state : state ,reset_after_don
 		tween.kill()
 	if property == null:
 		property = fallback_property
-	z_index = default_z_index+100
+	z_index = default_z_index+property.z_index_offset
 	current_state = what_state
 	tween = create_tween()
 	tween.set_trans(property.transition_type)
 	tween.set_ease(property.ease_type)
 	tween.set_parallel(true)
-	tween.tween_property(self, "position", default_position + property.position, property.motion_duration)
-	tween.tween_property(self, "rotation_degrees", property.rotation, property.motion_duration)
-	tween.tween_property(self, "scale", property.scale, property.motion_duration)
+	tween.tween_property(self, "offset_transform_position", property.position, property.motion_duration)
+	tween.tween_property(self, "offset_transform_position_ratio", property.position_ratio, property.motion_duration)
+	tween.tween_property(self, "offset_transform_rotation", deg_to_rad(property.rotation), property.motion_duration)
+	tween.tween_property(self, "offset_transform_scale", property.scale, property.motion_duration)
 	tween.tween_property(self, "self_modulate", property.color, property.motion_duration)
 	await tween.finished
 	if reset_after_done:
@@ -206,9 +204,10 @@ func tween_it_reset():
 	tween_reset.set_trans(property.transition_type)
 	tween_reset.set_ease(property.ease_type)
 	tween_reset.set_parallel(true)
-	tween_reset.tween_property(self, "position", default_position + property.position, property.motion_duration)
-	tween_reset.tween_property(self, "rotation_degrees", property.rotation, property.motion_duration)
-	tween_reset.tween_property(self, "scale", property.scale, property.motion_duration)
+	tween_reset.tween_property(self, "offset_transform_position", property.position, property.motion_duration)
+	tween_reset.tween_property(self, "offset_transform_position_ratio", property.position_ratio, property.motion_duration)
+	tween_reset.tween_property(self, "offset_transform_rotation", deg_to_rad(property.rotation), property.motion_duration)
+	tween_reset.tween_property(self, "offset_transform_scale", property.scale, property.motion_duration)
 	tween_reset.tween_property(self, "self_modulate", property.color, property.motion_duration)
 
 
@@ -217,7 +216,9 @@ func reset():
 	var property : ActionButtonEffect = on_rest
 	if property == null:
 		property = fallback_property
-	position = default_position + property.position
-	rotation_degrees = property.rotation
-	scale = Vector2.ONE * property.scale
+	z_index = default_z_index
+	offset_transform_position = property.position
+	offset_transform_position_ratio = property.position_ratio
+	offset_transform_rotation = deg_to_rad(property.rotation)
+	offset_transform_scale = Vector2.ONE * property.scale
 	self_modulate = property.color
